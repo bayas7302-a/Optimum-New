@@ -1,0 +1,8 @@
+{
+  "name": "optimum-contact-api",
+  "version": "1.1.0",
+  "private": true,
+  "dependencies": {
+    "@azure/communication-email": "^1.0.0"
+  }
+}

@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#1A281B" />
+  <meta name="description" content="Optimum for Professional Services — Shape Better Decisions." />
+  <title>Optimum for Professional Services | Shape Better Decisions</title>
+  <base href="./" />
+  <link rel="icon" href="../assets/mark.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <style>
+:root {
+  --deep-forest: #1A281B;
+  --secondary-forest: #2D4223;
+  --signature-green: #44BC08;
+  --signature-olive: #A8A809;
+  --light-sage: #E3E7E1;
+  --charcoal: #1F1F1F;
+  --paper: #FFFFFF;
+  --soft-white: #F8FAF6;
+  --muted-forest: #778178;
+  --line: rgba(26, 40, 27, .12);
+  --radius: 1.5rem;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --background: var(--light-sage);
+  --foreground: var(--charcoal);
+}
+
+
+* { box-sizing: border-box; }
+html {
+  min-width: 320px;
+  background: var(--light-sage);
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100dvh;
+  background: var(--light-sage);
+  color: var(--charcoal);
+  font-family: 'DM Sans', sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+button, a { font: inherit; }
+a { color: inherit; text-decoration: none; }
+button { border: 0; }
+::selection { color: var(--paper); background: var(--signature-green); }
+
+.site-shell {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: max(10px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(18px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  background:
+    radial-gradient(circle at 9% 15%, rgba(68, 188, 8, .12), transparent 13rem),
+    radial-gradient(circle at 92% 73%, rgba(168, 168, 9, .1), transparent 14rem),
+    var(--light-sage);
+}
+.site-shell::before {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+  opacity: .2;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+.ambient { position: absolute; z-index: 0; border-radius: 999px; pointer-events: none; }
+.ambient-one { width: 110px; height: 110px; left: -48px; top: 25%; background: var(--signature-green); opacity: .07; }
+.ambient-two { width: 150px; height: 150px; right: -75px; top: 10%; background: var(--signature-olive); opacity: .08; }
+
+.profile-card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 510px);
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid rgba(26, 40, 27, .11);
+  border-radius: 25px;
+  background: var(--paper);
+  box-shadow:
+    0 22px 50px rgba(26, 40, 27, .14),
+    0 7px 16px rgba(26, 40, 27, .06),
+    inset 0 1px 0 rgba(255, 255, 255, .72);
+}
+
+.hero-panel {
+  position: relative;
+  min-height: 360px;
+  overflow: hidden;
+  padding: 17px 21px 32px;
+  color: var(--soft-white);
+  text-align: center;
+  background:
+    radial-gradient(circle at 2% 100%, rgba(68, 188, 8, .25), transparent 14rem),
+    radial-gradient(circle at 98% 0%, rgba(168, 168, 9, .12), transparent 14rem),
+    linear-gradient(145deg, #205846 0%, #153d30 22%, var(--deep-forest) 72%, #0f1e15 100%);
+}
+.hero-panel::after {
+  position: absolute;
+  right: -100px;
+  bottom: -126px;
+  width: 280px;
+  height: 280px;
+  border: 1px solid rgba(227,231,225,.1);
+  border-radius: 50%;
+  box-shadow: 0 0 0 20px rgba(227,231,225,.02), 0 0 0 40px rgba(227,231,225,.017);
+  content: '';
+}
+.hero-glow {
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  width: 220px;
+  height: 160px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(68,188,8,.12);
+  filter: blur(36px);
+}
+.hero-topline { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.micro-label, .domain-line, .section-kicker, .trust-row, .page-footer, .service-pill { font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; }
+.micro-label { color: rgba(227,231,225,.6); font-size: 8px; }
+.hero-brand { position: relative; z-index: 1; padding-top: 26px; }
+.logo-plate { display: inline-flex; justify-content: center; width: min(235px, 76vw); }
+.wordmark { display: block; width: 100%; height: auto; filter: brightness(0) invert(1); }
+.hero-brand p { padding-top: 6px; color: rgba(227,231,225,.72); font-family: 'Fraunces', Georgia, serif; font-size: 12px; }
+.hero-copy { position: relative; z-index: 1; padding-top: 26px; }
+.domain-line { display: inline-flex; align-items: center; gap: 6px; margin: 0; color: #A9D49A; font-size: 10px; text-transform: none; letter-spacing: .02em; transition: color 180ms var(--ease-out); }
+a.domain-line:hover, a.domain-line:focus-visible { color: #C8E8B8; }
+h1, h2, p { margin: 0; }
+h1 { padding-top: 10px; color: var(--soft-white); font-family: 'Fraunces', Georgia, serif; font-size: clamp(29px, 8vw, 39px); font-weight: 600; line-height: .98; letter-spacing: -.055em; }
+h1 em { color: #9ADD73; font-style: normal; }
+.hero-description { max-width: 340px; margin: 0 auto; padding-top: 10px; color: rgba(227,231,225,.7); font-size: 12px; line-height: 1.5; }
+.social-strip { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 10px; padding-top: 19px; }
+.social-strip a { display: grid; width: 38px; height: 38px; place-items: center; border: 1px solid rgba(227,231,225,.18); border-radius: 50%; color: var(--soft-white); background: rgba(227,231,225,.07); transition: transform 180ms var(--ease-out), background 180ms var(--ease-out), border-color 180ms var(--ease-out); }
+.social-strip a:hover, .social-strip a:focus-visible { transform: translateY(-3px); border-color: rgba(154,221,115,.7); background: rgba(68,188,8,.19); }
+.social-strip a svg { width: 15px; height: 15px; display: block; }
+.social-strip .icon-ig { width: 16px; height: 16px; }
+.social-strip .icon-x { width: 13px; height: 13px; }
+
+.content-panel {
+  position: relative;
+  z-index: 2;
+  margin-top: -19px;
+  min-height: 545px;
+  padding: 25px 20px 22px;
+  border-radius: 25px 25px 0 0;
+  background: var(--paper);
+  box-shadow: 0 -3px 18px rgba(26,40,27,.04);
+}
+.section-heading { padding-bottom: 18px; }
+.section-kicker { margin-bottom: 8px; color: var(--signature-green); font-size: 10px; font-weight: 500; }
+h2 { color: var(--deep-forest); font-family: 'Fraunces', Georgia, serif; font-size: clamp(28px, 8vw, 39px); font-weight: 600; line-height: .98; letter-spacing: -.055em; }
+h2 span { color: var(--secondary-forest); }
+.section-heading > p:last-child { max-width: 330px; padding-top: 10px; color: #778178; font-size: 13px; line-height: 1.45; }
+
+.link-stack { display: grid; gap: 10px; }
+.social-card { display: flex; align-items: center; gap: 13px; min-height: 68px; padding: 9px 12px 9px 10px; border: 1px solid rgba(26,40,27,.09); border-radius: 15px; background: var(--soft-white); box-shadow: 0 8px 17px rgba(26,40,27,.06); transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out), border-color 180ms var(--ease-out), background 180ms var(--ease-out); animation: rise-in 500ms var(--ease-out) both; animation-delay: var(--delay, 0s); }
+.social-card:hover, .social-card:focus-visible { transform: translateY(-3px); border-color: rgba(68,188,8,.3); background: var(--paper); box-shadow: 0 13px 24px rgba(26,40,27,.1); }
+.social-card:nth-child(1) { --delay: .04s; }
+.social-card:nth-child(2) { --delay: .1s; }
+.social-card:nth-child(3) { --delay: .16s; }
+.social-card:nth-child(4) { --delay: .22s; }
+.social-icon { display: grid; width: 43px; height: 43px; flex: 0 0 auto; place-items: center; border-radius: 12px; color: var(--signature-green); background: #EAF6E3; transition: transform 180ms var(--ease-out), color 180ms var(--ease-out), background 180ms var(--ease-out); }
+.social-icon svg { width: 18px; height: 18px; display: block; }
+.social-icon .icon-ig { width: 19px; height: 19px; }
+.social-icon .icon-x { width: 15px; height: 15px; }
+.social-card:hover .social-icon, .social-card:focus-visible .social-icon { transform: scale(1.05); color: #3AA507; background: #E1F4D8; }
+.social-card[data-tone="lime"] .social-icon,
+.social-card[data-tone="olive"] .social-icon,
+.social-card[data-tone="charcoal"] .social-icon { color: var(--signature-green); background: #EAF6E3; }
+.social-label { display: flex; min-width: 0; flex: 1; flex-direction: column; gap: 4px; text-align: left; }
+.social-label strong { color: var(--deep-forest); font-family: 'Fraunces', Georgia, serif; font-size: 19px; font-weight: 600; line-height: 1; }
+.social-label small { overflow: hidden; color: #7C867D; font-size: 11px; line-height: 1; text-overflow: ellipsis; white-space: nowrap; }
+.arrow-icon { color: #6F8F68; transition: transform 180ms var(--ease-out), color 180ms var(--ease-out); }
+.social-card:hover .arrow-icon, .social-card:focus-visible .arrow-icon { color: var(--signature-green); transform: translate(2px, -2px); }
+
+.consultation-link { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 18px; padding: 12px 12px 12px 15px; border: 1px solid rgba(68,188,8,.18); border-radius: 14px; color: var(--deep-forest); background: #F1F8ED; transition: transform 180ms var(--ease-out), border-color 180ms var(--ease-out), background 180ms var(--ease-out); }
+.consultation-link:hover, .consultation-link:focus-visible { transform: translateY(-2px); border-color: rgba(68,188,8,.48); background: #EAF6E3; }
+.consultation-link > span:first-child { display: flex; flex-direction: column; gap: 4px; text-align: left; }
+.consultation-link strong { font-size: 12px; }
+.consultation-link small { color: #778178; font-size: 11px; }
+.cta-arrow { display: grid; width: 32px; height: 32px; flex: 0 0 auto; place-items: center; border-radius: 50%; color: var(--signature-green); background: rgba(68,188,8,.14); }
+.cta-arrow svg { width: 14px; height: 14px; display: block; }
+.trust-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; padding: 18px 0 14px; color: #7A877C; font-size: 9px; font-weight: 500; text-align: center; }
+.trust-row span, .trust-row a { display: inline-flex; align-items: center; gap: 6px; }
+.trust-row a { transition: color 180ms var(--ease-out); }
+.trust-row a:hover, .trust-row a:focus-visible { color: var(--signature-green); }
+.trust-row svg { width: 11px; height: 11px; color: var(--signature-green); flex: 0 0 auto; }
+.trust-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--signature-green); }
+.footer-block { display: grid; gap: 12px; }
+.service-pill { display: inline-flex; align-items: center; justify-content: center; justify-self: center; min-height: 28px; padding: 0 12px; border: 1px solid rgba(68,188,8,.18); border-radius: 999px; color: var(--deep-forest); background: #ECF5E8; font-family: 'DM Sans', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: .01em; }
+.contact-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.contact-action { display: flex; align-items: center; gap: 10px; min-height: 62px; padding: 8px 10px 8px 8px; border: 1px solid rgba(26,40,27,.09); border-radius: 15px; background: var(--soft-white); box-shadow: 0 8px 17px rgba(26,40,27,.06); transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out), border-color 180ms var(--ease-out), background 180ms var(--ease-out); }
+.contact-action:hover, .contact-action:focus-visible { transform: translateY(-2px); border-color: rgba(68,188,8,.32); background: var(--paper); box-shadow: 0 13px 24px rgba(26,40,27,.1); }
+.contact-icon { display: grid; width: 38px; height: 38px; flex: 0 0 auto; place-items: center; border-radius: 11px; color: var(--signature-green); background: #EAF6E3; transition: background 180ms var(--ease-out); }
+.contact-action:hover .contact-icon, .contact-action:focus-visible .contact-icon { background: #E1F4D8; }
+.contact-icon svg { width: 17px; height: 17px; display: block; }
+.contact-copy { display: flex; min-width: 0; flex: 1; flex-direction: column; gap: 4px; text-align: left; }
+.contact-copy strong { color: var(--deep-forest); font-family: 'Fraunces', Georgia, serif; font-size: 16px; font-weight: 600; line-height: 1; letter-spacing: -.03em; }
+.contact-copy small { overflow: hidden; color: #7C867D; font-size: 10px; line-height: 1; text-overflow: ellipsis; white-space: nowrap; }
+.contact-action .arrow-icon { color: #6F8F68; }
+.contact-action:hover .arrow-icon, .contact-action:focus-visible .arrow-icon { color: var(--signature-green); transform: translate(2px, -2px); }
+.page-footer { position: relative; z-index: 1; display: flex; justify-content: space-between; width: min(100%, 510px); margin: 15px auto 0; padding: 0 7px; color: rgba(26,40,27,.48); font-size: 8px; }
+.page-footer span:first-child { color: var(--deep-forest); font-weight: 700; }
+
+@keyframes rise-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+:focus-visible { outline: 3px solid rgba(68,188,8,.62); outline-offset: 3px; }
+
+@media (min-width: 700px) {
+  .site-shell { padding-top: max(38px, env(safe-area-inset-top)); padding-bottom: max(38px, env(safe-area-inset-bottom)); }
+  .profile-card { width: min(100%, 510px); }
+}
+@media (max-width: 420px) {
+  .site-shell { padding-right: 10px; padding-left: 10px; }
+  .profile-card { border-radius: 23px; }
+  .hero-panel { min-height: 345px; padding-right: 18px; padding-left: 18px; }
+  .content-panel { padding-right: 18px; padding-left: 18px; }
+  .logo-plate { width: min(220px, 77vw); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+  </style>
+</head>
+<body>
+  <main class="site-shell">
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <section class="profile-card" aria-label="Optimum for Professional Services social links">
+      <header class="hero-panel">
+        <div class="hero-glow"></div>
+        <div class="hero-topline">
+          <span class="micro-label">Optimum for Professional Services · Saudi Arabia</span>
+          <span class="micro-label">Since 2020</span>
+        </div>
+        <div class="hero-brand">
+          <div class="logo-plate"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNzIwIiBoZWlnaHQ9IjIwMS4wNTMiIHZpZXdCb3g9IjAgMCA3MjAgMjAxLjA1MyI+CjxwYXRoIGZpbGwtcnVsZT0ibm9uemVybyIgZmlsbD0icmdiKDI5Ljc5ODg4OSUsIDY1LjA5ODU3MiUsIDI4LjE5OTc2OCUpIiBmaWxsLW9wYWNpdHk9IjEiIGQ9Ik0gMTA2Ljc4MTI1IDQwLjg1OTM3NSBDIDc0LjIyNjU2MiA0MC44NTkzNzUgNDcuNzQyMTg4IDY3LjM0Mzc1IDQ3Ljc0MjE4OCA5OS44OTg0MzggQyA0Ny43NDIxODggMTMyLjQ0OTIxOSA3NC4yMjY1NjIgMTU4LjkzMzU5NCAxMDYuNzgxMjUgMTU4LjkzMzU5NCBDIDEwNy4xODc1IDE1OC45MzM1OTQgMTA3LjUxNTYyNSAxNTguNjA5Mzc1IDEwNy41MTU2MjUgMTU4LjIwMzEyNSBDIDEwNy41MTU2MjUgMTU3Ljc5Njg3NSAxMDcuMTg3NSAxNTcuNDY4NzUgMTA2Ljc4MTI1IDE1Ny40Njg3NSBDIDc1LjAzNTE1NiAxNTcuNDY4NzUgNDkuMjEwOTM4IDEzMS42NDA2MjUgNDkuMjEwOTM4IDk5Ljg5ODQzOCBDIDQ5LjIxMDkzOCA2OC4xNTIzNDQgNzUuMDM1MTU2IDQyLjMyNDIxOSAxMDYuNzgxMjUgNDIuMzI0MjE5IEMgMTA3LjE4NzUgNDIuMzI0MjE5IDEwNy41MTU2MjUgNDEuOTk2MDk0IDEwNy41MTU2MjUgNDEuNTkzNzUgQyAxMDcuNTE1NjI1IDQxLjE4NzUgMTA3LjE4NzUgNDAuODU5Mzc1IDEwNi43ODEyNSA0MC44NTkzNzUgIi8+CjxwYXRoIGZpbGwtcnVsZT0ibm9uemVybyIgZmlsbD0icmdiKDI5Ljc5ODg4OSUsIDY1LjA5ODU3MiUsIDI4LjE5OTc2OCUpIiBmaWxsLW9wYWNpdHk9IjEiIGQ9Ik0gOTguOTQ5MjE5IDE1Ny41MDM5MDYgQyA5OC45NDkyMTkgMTU0LjkxNzk2OSA5Ni44NTU0NjkgMTUyLjgyMDMxMiA5NC4yNjU2MjUgMTUyLjgyMDMxMiBDIDkxLjY3OTY4OCAxNTIuODIwMzEyIDg5LjU4MjAzMSAxNTQuOTE3OTY5IDg5LjU4MjAzMSAxNTcuNTAzOTA2IEMgODkuNTgyMDMxIDE2MC4wODk4NDQgOTEuNjc5Njg4IDE2Mi4xODc1IDk0LjI2NTYyNSAxNjIuMTg3NSBDIDk2Ljg1NTQ2OSAxNjIuMTg3NSA5OC45NDkyMTkgMTYwLjA4OTg0NCA5OC45NDkyMTkgMTU3LjUwMzkwNiAiLz4KPHBhdGggZmlsbC1ydWxlPSJub256ZXJvIiBmaWxsPSJyZ2IoMjkuNzk4ODg5JSwgNjUuMDk4NTcyJSwgMjguMTk5NzY4JSkiIGZpbGwtb3BhY2l0eT0iMSIgZD0iTSA2Ny4yMTA5MzggMTM5LjIzNDM3NSBDIDY3LjIxMDkzOCAxMzYuNjQ0NTMxIDY1LjExMzI4MSAxMzQuNTUwNzgxIDYyLjUyNzM0NCAxMzQuNTUwNzgxIEMgNTkuOTQxNDA2IDEzNC41NTA3ODEgNTcuODQzNzUgMTM2LjY0NDUzMSA1Ny44NDM3NSAxMzkuMjM0Mzc1IEMgNTcuODQzNzUgMTQxLjgyMDMxMiA1OS45NDE0MDYgMTQzLjkxNzk2OSA2Mi41MjczNDQgMTQzLjkxNzk2OSBDIDY1LjExMzI4MSAxNDMuOTE3OTY5IDY3LjIxMDkzOCAxNDEuODIwMzEyIDY3LjIxMDkzOCAxMzkuMjM0Mzc1ICIvPgo8cGF0aCBmaWxsLXJ1bGU9Im5vbnplcm8iIGZpbGw9InJnYigyOS43OTg4ODklLCA2NS4wOTg1NzIlLCAyOC4xOTk3NjglKSIgZmlsbC1vcGFjaXR5PSIxIiBkPSJNIDUzLjQ2NDg0NCAxMDEuMTA5Mzc1IEMgNTMuNDY0ODQ0IDk4LjUyMzQzOCA1MS4zNjcxODggOTYuNDI1NzgxIDQ4Ljc3NzM0NCA5Ni40MjU3ODEgQyA0Ni4xOTE0MDYgOTYuNDI1NzgxIDQ0LjA5Mzc1IDk4LjUyMzQzOCA0NC4wOTM3NSAxMDEuMTA5Mzc1IEMgNDQuMDkzNzUgMTAzLjY5NTMxMiA0Ni4xOTE0MDYgMTA1Ljc5Mjk2OSA0OC43NzczNDQgMTA1Ljc5Mjk2OSBDIDUxLjM2NzE4OCAxMDUuNzkyOTY5IDUzLjQ2NDg0NCAxMDMuNjk1MzEyIDUzLjQ2NDg0NCAxMDEuMTA5Mzc1ICIvPgo8cGF0aCBmaWxsLXJ1bGU9Im5vbnplcm8iIGZpbGw9InJnYigyOS43OTg4ODklLCA2NS4wOTg1NzIlLCAyOC4xOTk3NjglKSIgZmlsbC1vcGFjaXR5PSIxIiBkPSJNIDY1LjMwMDc4MSA2NC40NzY1NjIgQyA2NS4zMDA3ODEgNjEuODkwNjI1IDYzLjIwMzEyNSA1OS43OTI5NjkgNjAuNjE3MTg4IDU5Ljc5Mjk2OSBDIDU4LjAzMTI1IDU5Ljc5Mjk2OSA1NS45MzM1OTQgNjEuODkwNjI1IDU1LjkzMzU5NCA2NC40NzY1NjIgQyA1NS45MzM1OTQgNjcuMDYyNSA1OC4wMzEyNSA2OS4xNjAxNTYgNjAuNjE3MTg4IDY5LjE2MDE1NiBDIDYzLjIwMzEyNSA2OS4xNjAxNTYgNjUuMzAwNzgxIDY3LjA2MjUgNjUuMzAwNzgxIDY0LjQ3NjU2MiAiLz4KPHBhdGggZmlsbC1ydWxlPSJub256ZXJvIiBmaWxsPSJyZ2IoMjkuNzk4ODg5JSwgNjUuMDk4NTcyJSwgMjguMTk5NzY4JSkiIGZpbGwtb3BhY2l0eT0iMSIgZD0iTSA4MC44NDM3NSA4My4zOTg0MzggQyA4MC44NDM3NSA4MC44MTI1IDc4Ljc0NjA5NCA3OC43MTQ4NDQgNzYuMTYwMTU2IDc4LjcxNDg0NCBDIDczLjU3NDIxOSA3OC43MTQ4NDQgNzEuNDc2NTYyIDgwLjgxMjUgNzEuNDc2NTYyIDgzLjM5ODQzOCBDIDcxLjQ3NjU2MiA4NS45ODQzNzUgNzMuNTc0MjE5IDg4LjA4MjAzMSA3Ni4xNjAxNTYgODguMDgyMDMxIEMgNzguNzQ2MDk0IDg4LjA4MjAzMSA4MC44NDM3NSA4NS45ODQzNzUgODAuODQzNzUgODMuMzk4NDM4ICIvPgo8cGF0aCBmaWxsLXJ1bGU9Im5vbnplcm8iIGZpbGw9InJnYigyOS43OTg4ODklLCA2NS4wOTg1NzIlLCAyOC4xOTk3NjglKSIgZmlsbC1vcGFjaXR5PSIxIiBkPSJNIDgyLjY2MDE1NiAxMjIuODI4MTI1IEMgODIuNjYwMTU2IDEyMC4yNDIxODggODAuNTY2NDA2IDExOC4xNDQ1MzEgNzcuOTc2NTYyIDExOC4xNDQ1MzEgQyA3NS4zOTA2MjUgMTE4LjE0NDUzMSA3My4yOTI5NjkgMTIwLjI0MjE4OCA3My4yOTI5NjkgMTIyLjgyODEyNSBDIDczLjI5Mjk2OSAxMjUuNDE0MDYyIDc1LjM5MDYyNSAxMjcuNTExNzE5IDc3Ljk3NjU2MiAxMjcuNTExNzE5IEMgODAuNTY2NDA2IDEyNy41MTE3MTkgODIuNjYwMTU2IDEyNS40MTQwNjIgODIuNjYwMTU2IDEyMi44MjgxMjUgIi8+CjxwYXRoIGZpbGwtcnVsZT0ibm9uemVybyIgZmlsbD0icmdiKDI5Ljc5ODg4OSUsIDY1LjA5ODU3MiUsIDI4LjE5OTc2OCUpIiBmaWxsLW9wYWNpdHk9IjEiIGQ9Ik0gOTguNTMxMjUgNDIuOTQ1MzEyIEMgOTguNTMxMjUgNDAuMzU1NDY5IDk2LjQzMzU5NCAzOC4yNjE3MTkgOTMuODQ3NjU2IDM4LjI2MTcxOSBDIDkxLjI2MTcxOSAzOC4yNjE3MTkgODkuMTY0MDYyIDQwLjM1NTQ2OSA4OS4xNjQwNjIgNDIuOTQ1MzEyIEMgODkuMTY0MDYyIDQ1LjUzMTI1IDkxLjI2MTcxOSA0Ny42Mjg5MDYgOTMuODQ3NjU2IDQ3LjYyODkwNiBDIDk2LjQzMzU5NCA0Ny42Mjg5MDYgOTguNTMxMjUgNDUuNTMxMjUgOTguNTMxMjUgNDIuOTQ1MzEyICIvPgo8cGF0aCBmaWxsLXJ1bGU9Im5vbnplcm8iIGZpbGw9InJnYigyOS43OTg4ODklLCA2NS4wOTg1NzIlLCAyOC4xOTk3NjglKSIgZmlsbC1vcGFjaXR5PSIxIiBkPSJNIDc3LjU1ODU5NCAxMjEuMTgzNTk0IEMgNzcuNTIzNDM4IDEyMS4xODM1OTQgNzcuNDg4MjgxIDEyMS4xOTE0MDYgNzcuNDU3MDMxIDEyMS4yMDcwMzEgQyA3Ny4zMzIwMzEgMTIxLjI2MTcxOSA3Ny4yODEyNSAxMjEuNDA2MjUgNzcuMzM1OTM4IDEyMS41MzEyNSBMIDkzLjk3MjY1NiAxNTguMDIzNDM4IEMgOTQuMDMxMjUgMTU4LjE0ODQzOCA5NC4xNzU3ODEgMTU4LjIwMzEyNSA5NC4yOTY4NzUgMTU4LjE0NDUzMSBDIDk0LjQyMTg3NSAxNTguMDg5ODQ0IDk0LjQ3NjU2MiAxNTcuOTQ1MzEyIDk0LjQyMTg3NSAxNTcuODIwMzEyIEwgNzcuNzgxMjUgMTIxLjMyODEyNSBDIDc3LjczODI4MSAxMjEuMjM4MjgxIDc3LjY1MjM0NCAxMjEuMTgzNTk0IDc3LjU1ODU5NCAxMjEuMTgzNTk0ICIvPgo8cGF0aCBmaWxsLXJ1bGU9Im5vbnplcm8iIGZpbGw9InJnYigyOS43OTg4ODklLCA2NS4wOTg1NzIlLCAyOC4xOTk3NjglKSIgZmlsbC1vcGFjaXR5PSIxIiBkPSJNIDc3LjgzOTg0NCAxMjIuMzA0Njg4IEMgNzcuNzczNDM4IDEyMi4zMDQ2ODggNzcuNzA3MDMxIDEyMi4zMzIwMzEgNzcuNjYwMTU2IDEyMi4zODI4MTIgTCA2Mi4zNDc2NTYgMTM5LjA2NjQwNiBDIDYyLjI1NzgxMiAxMzkuMTY3OTY5IDYyLjI2MTcxOSAxMzkuMzI0MjE5IDYyLjM2MzI4MSAxMzkuNDE0MDYyIEMgNjIuNDYwOTM4IDEzOS41MDM5MDYgNjIuNjE3MTg4IDEzOS41IDYyLjcwNzAzMSAxMzkuMzk4NDM4IEwgNzguMDE5NTMxIDEyMi43MTQ4NDQgQyA3OC4xMDkzNzUgMTIyLjYxMzI4MSA3OC4xMDE1NjIgMTIyLjQ1NzAzMSA3OC4wMDM5MDYgMTIyLjM2NzE4OCBDIDc3Ljk1NzAzMSAxMjIuMzI0MjE5IDc3Ljg5ODQzOCAxMjIuMzA0Njg4IDc3LjgzOTg0NCAxMjIuMzA0Njg4ICIvPgo8cGF0aCBmaWxsLXJ1bGU9Im5vbnplcm8iIGZpbGw9InJnYigyOS43OTg4ODklLCA2NS4wOTg1NzIlLCAyOC4xOTk3NjglKSIgZmlsbC1vcGFjaXR5PSIxIiBkPSJNIDc1Ljk0MTQwNiA4Mi43MzQzNzUgQyA3NS44OTQ1MzEgODIuNzM0Mzc1IDc1Ljg0NzY1NiA4Mi43NDYwOTQgNzUuODA4NTk0IDgyLjc3MzQzOCBMIDQ4LjE5MTQwNiAxMDAuNzE4NzUgTCA3OC4yNSAxMjMuNTgyMDMxIEMgNzguMzU1NDY5IDEyMy42NjQwNjIgNzguNTExNzE5IDEyMy42NDQ1MzEgNzguNTkzNzUgMTIzLjUzNTE1NiBDIDc4LjY3NTc4MSAxMjMuNDI1NzgxIDc4LjY1MjM0NCAxMjMuMjczNDM4IDc4LjU0Njg3NSAxMjMuMTkxNDA2IEwgNDkuMDM5MDYyIDEwMC43NSBMIDc2LjA3NDIxOSA4My4xODM1OTQgQyA3Ni4xODc1IDgzLjEwOTM3NSA3Ni4yMTg3NSA4Mi45NjA5MzggNzYuMTQ0NTMxIDgyLjg0NzY1NiBDIDc2LjA5NzY1NiA4Mi43NzM0MzggNzYuMDE5NTMxIDgyLjczNDM3NSA3NS45NDE0MDYgODIuNzM0Mzc1ICIvPgo8cGF0aCBmaWxsLXJ1bGU9Im5vbnplcm8iIGZpbGw9InJnYigyOS43OTg4ODklLCA2NS4wOTg1NzIlLCAyOC4xOTk3NjglKSIgZmlsbC1vcGFjaXR5PSIxIiBkPSJNIDYwLjc4MTI1IDYzLjcxODc1IEMgNjAuNzI2NTYyIDYzLjcxODc1IDYwLjY3NTc4MSA2My43MzQzNzUgNjAuNjI4OTA2IDYzLjc2OTUzMSBDIDYwLjUyMzQzOCA2My44NTE1NjIgNjAuNTAzOTA2IDY0LjAwMzkwNiA2MC41ODU5MzggNjQuMTEzMjgxIEwgNzUuOTY0ODQ0IDg0LjEwNTQ2OSBDIDc2LjA1MDc4MSA4NC4yMTQ4NDQgNzYuMjAzMTI1IDg0LjIzNDM3NSA3Ni4zMDg1OTQgODQuMTUyMzQ0IEMgNzYuNDE3OTY5IDg0LjA3MDMxMiA3Ni40Mzc1IDgzLjkxNDA2MiA3Ni4zNTU0NjkgODMuODA4NTk0IEwgNjAuOTcyNjU2IDYzLjgxMjUgQyA2MC45MjU3ODEgNjMuNzUgNjAuODUxNTYyIDYzLjcxODc1IDYwLjc4MTI1IDYzLjcxODc1ICIvPgo8cGF0aCBmaWxsLXJ1bGU9Im5vbnplcm8iIGZpbGw9InJnYigyOS43OTg4ODklLCA2NS4wOTg1NzIlLCAyOC4xOTk3NjglKSIgZmlsbC1vcGFjaXR5PSIxIiBkPSJNIDk0LjMzNTkzOCA0Mi44ODY3MTkgQyA5NC4yNDIxODggNDIuODg2NzE5IDk0LjE1NjI1IDQyLjkzNzUgOTQuMTEzMjgxIDQzLjAzMTI1IEwgNzUuOTM3NSA4My4yOTY4NzUgQyA3NS44ODI4MTIgODMuNDIxODc1IDc1LjkzNzUgODMuNTY2NDA2IDc2LjA1ODU5NCA4My42MjEwOTQgQyA3Ni4xODM1OTQgODMuNjc1NzgxIDc2LjMyODEyNSA4My42MjEwOTQgNzYuMzgyODEyIDgzLjUgTCA5NC41NTg1OTQgNDMuMjMwNDY5IEMgOTQuNjE3MTg4IDQzLjEwOTM3NSA5NC41NjI1IDQyLjk2MDkzOCA5NC40Mzc1IDQyLjkwNjI1IEMgOTQuNDA2MjUgNDIuODk0NTMxIDk0LjM3MTA5NCA0Mi44ODY3MTkgOTQuMzM1OTM4IDQyLjg4NjcxOSAiLz4KPHBhdGggZmlsbC1ydWxlPSJub256ZXJvIiBmaWxsPSJyZ2IoNy40OTk2OTUlLCAxOS41OTk5MTUlLCAxMC45OTg1MzUlKSIgZmlsbC1vcGFjaXR5PSIxIiBkPSJNIDEwOC4xNzk2ODggMzcuOTI1NzgxIEMgMTA2LjE1MjM0NCAzNy45MjU3ODEgMTA0LjUxMTcxOSAzOS41NjY0MDYgMTA0LjUxMTcxOSA0MS41OTM3NSBDIDEwNC41MTE3MTkgNDMuNjE3MTg4IDEwNi4xNTIzNDQgNDUuMjYxNzE5IDEwOC4xNzk2ODggNDUuMjYxNzE5IEMgMTM4LjMwNDY4OCA0NS4yNjE3MTkgMTYyLjgxNjQwNiA2OS43Njk1MzEgMTYyLjgxNjQwNiA5OS44OTg0MzggQyAxNjIuODE2NDA2IDEzMC4wMjM0MzggMTM4LjMwNDY4OCAxNTQuNTM1MTU2IDEwOC4xNzk2ODggMTU0LjUzNTE1NiBDIDEwNi4xNTIzNDQgMTU0LjUzNTE1NiAxMDQuNTExNzE5IDE1Ni4xNzU3ODEgMTA0LjUxMTcxOSAxNTguMjAzMTI1IEMgMTA0LjUxMTcxOSAxNjAuMjI2NTYyIDEwNi4xNTIzNDQgMTYxLjg3MTA5NCAxMDguMTc5Njg4IDE2MS44NzEwOTQgQyAxNDIuMzUxNTYyIDE2MS44NzEwOTQgMTcwLjE1MjM0NCAxMzQuMDcwMzEyIDE3MC4xNTIzNDQgOTkuODk4NDM4IEMgMTcwLjE1MjM0NCA2NS43MjY1NjIgMTQyLjM1MTU2MiAzNy45MjU3ODEgMTA4LjE3OTY4OCAzNy45MjU3ODEgIi8+CjxwYXRoIGZpbGwtcnVsZT0ibm9uemVybyIgZmlsbD0icmdiKDcuNDk5Njk1JSwgMTkuNTk5OTE1JSwgMTAuOTk4NTM1JSkiIGZpbGwtb3BhY2l0eT0iMSIgZD0iTSAyMDQuNzc3MzQ0IDgzLjUzNTE1NiBMIDIwNC43NzczNDQgMTExLjE0ODQzOCBDIDIwNC43NzczNDQgMTE1LjYwMTU2MiAyMDguMzkwNjI1IDExOS4yMTQ4NDQgMjEyLjg0NzY1NiAxMTkuMjE0ODQ0IEwgMjM1LjA2NjQwNiAxMTkuMjE0ODQ0IEMgMjM5LjUxOTUzMSAxMTkuMjE0ODQ0IDI0My4xMzI4MTIgMTE1LjYwMTU2MiAyNDMuMTMyODEyIDExMS4xNDg0MzggTCAyNDMuMTMyODEyIDgzLjUzNTE1NiBDIDI0My4xMzI4MTIgNzkuMDgyMDMxIDIzOS41MTk1MzEgNzUuNDY4NzUgMjM1LjA2NjQwNiA3NS40Njg3NSBMIDIxMi44NDc2NTYgNzUuNDY4NzUgQyAyMDguMzkwNjI1IDc1LjQ2ODc1IDIwNC43NzczNDQgNzkuMDgyMDMxIDIwNC43NzczNDQgODMuNTM1MTU2IE0gMjM1LjA2NjQwNiAxMzAuNjg3NSBMIDIxMi44NDc2NTYgMTMwLjY4NzUgQyAyMDIuMDU0Njg4IDEzMC42ODc1IDE5My4zMDA3ODEgMTIxLjk0MTQwNiAxOTMuMzAwNzgxIDExMS4xNDg0MzggTCAxOTMuMzAwNzgxIDgzLjUzNTE1NiBDIDE5My4zMDA3ODEgNzIuNzQyMTg4IDIwMi4wNTQ2ODggNjMuOTg4MjgxIDIxMi44NDc2NTYgNjMuOTg4MjgxIEwgMjM1LjA2NjQwNiA2My45ODgyODEgQyAyNDUuODU5Mzc1IDYzLjk4ODI4MSAyNTQuNjA1NDY5IDcyLjc0MjE4OCAyNTQuNjA1NDY5IDgzLjUzNTE1NiBMIDI1NC42MDU0NjkgMTExLjE0ODQzOCBDIDI1NC42MDU0NjkgMTIxLjk0MTQwNiAyNDUuODU5Mzc1IDEzMC42ODc1IDIzNS4wNjY0MDYgMTMwLjY4NzUgIi8+CjxwYXRoIGZpbGwtcnVsZT0ibm9uemVybyIgZmlsbD0icmdiKDcuNDk5Njk1JSwgMTkuNTk5OTE1JSwgMTAuOTk4NTM1JSkiIGZpbGwtb3BhY2l0eT0iMSIgZD0iTSAyNzYuMTM2NzE5IDExMS4xNDg0MzggTCAyNzYuMTM2NzE5IDEzMC42ODc1IEwgMjY0LjY2NDA2MiAxMzAuNjg3NSBMIDI2NC42NjQwNjIgMTExLjE0ODQzOCBDIDI2NC42NjQwNjIgMTAwLjM1NTQ2OSAyNzMuNDE0MDYyIDkxLjYwNTQ2OSAyODQuMjA3MDMxIDkxLjYwNTQ2OSBMIDMwNi40MjU3ODEgOTEuNjA1NDY5IEMgMzEwLjg3ODkwNiA5MS42MDU0NjkgMzE0LjQ5NjA5NCA4Ny45OTIxODggMzE0LjQ5NjA5NCA4My41MzUxNTYgQyAzMTQuNDk2MDk0IDc5LjA4MjAzMSAzMTAuODc4OTA2IDc1LjQ2ODc1IDMwNi40MjU3ODEgNzUuNDY4NzUgTCAyNjQuNjY0MDYyIDc1LjQ2ODc1IEwgMjY0LjY2NDA2MiA2My45ODgyODEgTCAzMDYuNDI1NzgxIDYzLjk4ODI4MSBDIDMxNy4yMTg3NSA2My45ODgyODEgMzI1Ljk2ODc1IDcyLjc0MjE4OCAzMjUuOTY4NzUgODMuNTM1MTU2IEMgMzI1Ljk2ODc1IDk0LjMyODEyNSAzMTcuMjE4NzUgMTAzLjA3ODEyNSAzMDYuNDI1NzgxIDEwMy4wNzgxMjUgTCAyODQuMjA3MDMxIDEwMy4wNzgxMjUgQyAyNzkuNzUgMTAzLjA3ODEyNSAyNzYuMTM2NzE5IDEwNi42OTE0MDYgMjc2LjEzNjcxOSAxMTEuMTQ4NDM4ICIvPgo8cGF0aCBmaWxsLXJ1bGU9Im5vbnplcm8iIGZpbGw9InJnYig3LjQ5OTY5NSUsIDE5LjU5OTkxNSUsIDEwLjk5ODUzNSUpIiBmaWxsLW9wYWNpdHk9IjEiIGQ9Ik0gMzkxLjUzMTI1IDYzLjk4ODI4MSBMIDM5MS41MzEyNSA3NS40Njg3NSBMIDM2Ni42MDkzNzUgNzUuNDY4NzUgTCAzNjYuNjA5Mzc1IDEzMC42ODc1IEwgMzU1LjEzMjgxMiAxMzAuNjg3NSBMIDM1NS4xMzI4MTIgNzUuNDY4NzUgTCAzMzAuMjE4NzUgNzUuNDY4NzUgTCAzMzAuMjE4NzUgNjMuOTg4MjgxIFogTSAzOTEuNTMxMjUgNjMuOTg4MjgxICIvPgo8cGF0aCBmaWxsLXJ1bGU9Im5vbnplcm8iIGZpbGw9InJnYig3LjQ5OTY5NSUsIDE5LjU5OTkxNSUsIDEwLjk5ODUzNSUpIiBmaWxsLW9wYWNpdHk9IjEiIGQ9Ik0gMzk5Ljk2NDg0NCA2My45ODgyODEgTCA0MTEuNDQxNDA2IDYzLjk4ODI4MSBMIDQxMS40NDE0MDYgMTMwLjY4NzUgTCAzOTkuOTY0ODQ0IDEzMC42ODc1IFogTSAzOTkuOTY0ODQ0IDYzLjk4ODI4MSAiLz4KPHBhdGggZmlsbC1ydWxlPSJub256ZXJvIiBmaWxsPSJyZ2IoNy40OTk2OTUlLCAxOS41OTk5MTUlLCAxMC45OTg1MzUlKSIgZmlsbC1vcGFjaXR5PSIxIiBkPSJNIDQzNS4zNTU0NjkgODMuNTM1MTU2IEwgNDM1LjM1NTQ2OSAxMzAuNjk1MzEyIEwgNDIzLjg3ODkwNiAxMzAuNjk1MzEyIEwgNDIzLjg3ODkwNiA4My41MzUxNTYgQyA0MjMuODc4OTA2IDcyLjc0MjE4OCA0MzIuNjMyODEyIDYzLjk4ODI4MSA0NDMuNDI1NzgxIDYzLjk4ODI4MSBMIDQ1MS44NTkzNzUgNjMuOTg4MjgxIEMgNDU3LjI0NjA5NCA2My45ODgyODEgNDYyLjEyODkwNiA2Ni4xNzE4NzUgNDY1LjY2NDA2MiA2OS42OTkyMTkgQyA0NjkuMjAzMTI1IDY2LjE3NTc4MSA0NzQuMDc4MTI1IDYzLjk4ODI4MSA0NzkuNDcyNjU2IDYzLjk4ODI4MSBMIDQ4Ny45MDYyNSA2My45ODgyODEgQyA0OTguNjk5MjE5IDYzLjk4ODI4MSA1MDcuNDQ5MjE5IDcyLjczODI4MSA1MDcuNDQ5MjE5IDgzLjUzMTI1IEwgNTA3LjQ0OTIxOSAxMzAuNjg3NSBMIDQ5NS45NzY1NjIgMTMwLjY4NzUgTCA0OTUuOTc2NTYyIDgzLjUzNTE1NiBDIDQ5NS45NzY1NjIgNzkuMDgyMDMxIDQ5Mi4zNjMyODEgNzUuNDY4NzUgNDg3LjkwNjI1IDc1LjQ2ODc1IEwgNDc5LjQ3MjY1NiA3NS40Njg3NSBDIDQ3NS4wMTU2MjUgNzUuNDY4NzUgNDcxLjQwMjM0NCA3OS4wODIwMzEgNDcxLjQwMjM0NCA4My41MzUxNTYgTCA0NzEuNDAyMzQ0IDEzMC42OTUzMTIgTCA0NTkuOTI5Njg4IDEzMC42OTUzMTIgTCA0NTkuOTI5Njg4IDgzLjUzNTE1NiBDIDQ1OS45Mjk2ODggNzkuMDgyMDMxIDQ1Ni4zMTY0MDYgNzUuNDY4NzUgNDUxLjg1OTM3NSA3NS40Njg3NSBMIDQ0My40MjU3ODEgNzUuNDY4NzUgQyA0MzguOTcyNjU2IDc1LjQ2ODc1IDQzNS4zNTU0NjkgNzkuMDgyMDMxIDQzNS4zNTU0NjkgODMuNTM1MTU2ICIvPgo8cGF0aCBmaWxsLXJ1bGU9Im5vbnplcm8iIGZpbGw9InJnYig3LjQ5OTY5NSUsIDE5LjU5OTkxNSUsIDEwLjk5ODUzNSUpIiBmaWxsLW9wYWNpdHk9IjEiIGQ9Ik0gNTE5LjI1MzkwNiA2My45ODgyODEgTCA1MzAuNzM0Mzc1IDYzLjk4ODI4MSBMIDUzMC43MzQzNzUgMTExLjE0ODQzOCBDIDUzMC43MzQzNzUgMTE1LjYwMTU2MiA1MzQuMzQzNzUgMTE5LjIxNDg0NCA1MzguNzk2ODc1IDExOS4yMTQ4NDQgTCA1NjEuMDE1NjI1IDExOS4yMTQ4NDQgQyA1NjUuNDcyNjU2IDExOS4yMTQ4NDQgNTY5LjA4NTkzOCAxMTUuNjAxNTYyIDU2OS4wODU5MzggMTExLjE0ODQzOCBMIDU2OS4wODU5MzggNjMuOTg4MjgxIEwgNTgwLjU2MjUgNjMuOTg4MjgxIEwgNTgwLjU2MjUgMTExLjE0ODQzOCBDIDU4MC41NjI1IDEyMS45NDE0MDYgNTcxLjgwODU5NCAxMzAuNjg3NSA1NjEuMDE1NjI1IDEzMC42ODc1IEwgNTM4Ljc5Njg3NSAxMzAuNjg3NSBDIDUyOC4wMDM5MDYgMTMwLjY4NzUgNTE5LjI1MzkwNiAxMjEuOTQxNDA2IDUxOS4yNTM5MDYgMTExLjE0ODQzOCBaIE0gNTE5LjI1MzkwNiA2My45ODgyODEgIi8+CjxwYXRoIGZpbGwtcnVsZT0ibm9uemVybyIgZmlsbD0icmdiKDcuNDk5Njk1JSwgMTkuNTk5OTE1JSwgMTAuOTk4NTM1JSkiIGZpbGwtb3BhY2l0eT0iMSIgZD0iTSA2MDMuODEyNSA4My41MzUxNTYgTCA2MDMuODEyNSAxMzAuNjk1MzEyIEwgNTkyLjMzNTkzOCAxMzAuNjk1MzEyIEwgNTkyLjMzNTkzOCA4My41MzUxNTYgQyA1OTIuMzM1OTM4IDcyLjc0MjE4OCA2MDEuMDg5ODQ0IDYzLjk4ODI4MSA2MTEuODgyODEyIDYzLjk4ODI4MSBMIDYyMC4zMTY0MDYgNjMuOTg4MjgxIEMgNjI1LjcwMzEyNSA2My45ODgyODEgNjMwLjU4NTkzOCA2Ni4xNzE4NzUgNjM0LjEyMTA5NCA2OS42OTkyMTkgQyA2MzcuNjU2MjUgNjYuMTc1NzgxIDY0Mi41MzUxNTYgNjMuOTg4MjgxIDY0Ny45MjU3ODEgNjMuOTg4MjgxIEwgNjU2LjM2MzI4MSA2My45ODgyODEgQyA2NjcuMTU2MjUgNjMuOTg4MjgxIDY3NS45MDYyNSA3Mi43MzgyODEgNjc1LjkwNjI1IDgzLjUzMTI1IEwgNjc1LjkwNjI1IDEzMC42ODc1IEwgNjY0LjQzMzU5NCAxMzAuNjg3NSBMIDY2NC40MzM1OTQgODMuNTM1MTU2IEMgNjY0LjQzMzU5NCA3OS4wODIwMzEgNjYwLjgxNjQwNiA3NS40Njg3NSA2NTYuMzYzMjgxIDc1LjQ2ODc1IEwgNjQ3LjkyNTc4MSA3NS40Njg3NSBDIDY0My40NzI2NTYgNzUuNDY4NzUgNjM5Ljg1OTM3NSA3OS4wODIwMzEgNjM5Ljg1OTM3NSA4My41MzUxNTYgTCA2MzkuODU5Mzc1IDEzMC42OTUzMTIgTCA2MjguMzg2NzE5IDEzMC42OTUzMTIgTCA2MjguMzg2NzE5IDgzLjUzNTE1NiBDIDYyOC4zODY3MTkgNzkuMDgyMDMxIDYyNC43NzM0MzggNzUuNDY4NzUgNjIwLjMxNjQwNiA3NS40Njg3NSBMIDYxMS44ODI4MTIgNzUuNDY4NzUgQyA2MDcuNDI1NzgxIDc1LjQ2ODc1IDYwMy44MTI1IDc5LjA4MjAzMSA2MDMuODEyNSA4My41MzUxNTYgIi8+Cjwvc3ZnPgo=" alt="Optimum for Professional Services" class="wordmark" /></div>
+          <p>for Professional Services</p>
+        </div>
+        <div class="hero-copy">
+          <a class="domain-line" href="../" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">◉</span> optimum-ksa.com</a>
+          <h1>Shape Better <em>Decisions.</em></h1>
+          <p class="hero-description">Advanced verification, credential evaluation, and workforce skills intelligence for organisations across Saudi Arabia.</p>
+        </div>
+        <nav class="social-strip" aria-label="Social channels">
+          <a href="https://www.linkedin.com/company/optimum-verification-company/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.54 9.23H3.8V20.5h2.74V9.23ZM5.17 3.5a1.59 1.59 0 1 0 .01 3.18 1.59 1.59 0 0 0-.01-3.18ZM20.5 13.24c0-3.38-1.8-4.95-4.21-4.95-1.94 0-2.8 1.07-3.29 1.82V9.23h-2.74c.04.87 0 11.27 0 11.27h2.74v-6.3c0-.34.02-.67.12-.91.27-.67.88-1.36 1.9-1.36 1.34 0 1.87 1.02 1.87 2.51v6.06H20.5v-6.33Z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/optimum.ksa/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg class="icon-ig" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5.2" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.05" stroke="currentColor" stroke-width="1.8"/><circle cx="17.15" cy="6.85" r="1.15" fill="currentColor"/></svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61582168651044" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.72 8.75V6.52c0-.9.5-1.4 1.4-1.4h1.38V3h-2.38C12.7 3 11.05 4.72 11.05 7.18v1.57H9v2.72h2.05V21h3.67v-9.53h2.48l.42-2.72h-2.9Z"/></svg>
+          </a>
+          <a href="https://x.com/optimumver" target="_blank" rel="noopener noreferrer" aria-label="X">
+            <svg class="icon-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.374 6.231H2.83l7.73-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </nav>
+      </header>
+      <section class="content-panel" aria-label="Optimum for Professional Services social channels">
+        <div class="section-heading">
+          <p class="section-kicker">Social channels</p>
+          <h2>Connect with <span>Optimum for Professional Services</span></h2>
+          <p>Follow our official profiles for verification updates and company news.</p>
+        </div>
+        <div class="link-stack">
+          <a class="social-card" data-tone="green" href="https://www.linkedin.com/company/optimum-verification-company/" target="_blank" rel="noopener noreferrer">
+            <span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.54 9.23H3.8V20.5h2.74V9.23ZM5.17 3.5a1.59 1.59 0 1 0 .01 3.18 1.59 1.59 0 0 0-.01-3.18ZM20.5 13.24c0-3.38-1.8-4.95-4.21-4.95-1.94 0-2.8 1.07-3.29 1.82V9.23h-2.74c.04.87 0 11.27 0 11.27h2.74v-6.3c0-.34.02-.67.12-.91.27-.67.88-1.36 1.9-1.36 1.34 0 1.87 1.02 1.87 2.51v6.06H20.5v-6.33Z"/></svg></span>
+            <span class="social-label"><strong>LinkedIn</strong><small>Company updates</small></span>
+            <span class="arrow-icon" aria-hidden="true">↗</span>
+          </a>
+          <a class="social-card" data-tone="lime" href="https://www.instagram.com/optimum.ksa/" target="_blank" rel="noopener noreferrer">
+            <span class="social-icon" aria-hidden="true"><svg class="icon-ig" viewBox="0 0 24 24" fill="none"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5.2" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.05" stroke="currentColor" stroke-width="1.8"/><circle cx="17.15" cy="6.85" r="1.15" fill="currentColor"/></svg></span>
+            <span class="social-label"><strong>Instagram</strong><small>Stories &amp; highlights</small></span>
+            <span class="arrow-icon" aria-hidden="true">↗</span>
+          </a>
+          <a class="social-card" data-tone="olive" href="https://www.facebook.com/profile.php?id=61582168651044" target="_blank" rel="noopener noreferrer">
+            <span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.72 8.75V6.52c0-.9.5-1.4 1.4-1.4h1.38V3h-2.38C12.7 3 11.05 4.72 11.05 7.18v1.57H9v2.72h2.05V21h3.67v-9.53h2.48l.42-2.72h-2.9Z"/></svg></span>
+            <span class="social-label"><strong>Facebook</strong><small>Community page</small></span>
+            <span class="arrow-icon" aria-hidden="true">↗</span>
+          </a>
+          <a class="social-card" data-tone="green" href="https://x.com/optimumver" target="_blank" rel="noopener noreferrer">
+            <span class="social-icon" aria-hidden="true"><svg class="icon-x" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.374 6.231H2.83l7.73-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span>
+            <span class="social-label"><strong>X</strong><small>Announcements</small></span>
+            <span class="arrow-icon" aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <a class="consultation-link" href="mailto:info@optimum-ksa.com">
+          <span><strong>Need reliable verification support?</strong><small>Request a consultation with our team.</small></span>
+          <span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <div class="trust-row">
+          <span>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s6.4-5.3 6.4-10.1A6.4 6.4 0 0 0 5.6 10.9C5.6 15.7 12 21 12 21Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10.9" r="2.15" stroke="currentColor" stroke-width="1.8"/></svg>
+            Riyadh, Kingdom of Saudi Arabia
+          </span>
+          <span class="trust-dot"></span>
+          <a href="mailto:info@optimum-ksa.com">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.6" y="5.6" width="16.8" height="12.8" rx="2.1" stroke="currentColor" stroke-width="1.8"/><path d="m4.4 7.4 7.6 5.4 7.6-5.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            info@optimum-ksa.com
+          </a>
+        </div>
+        <div class="footer-block">
+          <span class="service-pill">Optimum for Professional Services</span>
+          <div class="contact-bar">
+            <a class="contact-action" href="tel:+966112345678">
+              <span class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><rect x="7.2" y="2.6" width="9.6" height="18.8" rx="2.4" stroke="currentColor" stroke-width="1.7"/><path d="M10.2 18.7h3.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              </span>
+              <span class="contact-copy"><strong>Call</strong><small>+966 11 234 5678</small></span>
+              <span class="arrow-icon" aria-hidden="true">↗</span>
+            </a>
+            <a class="contact-action" href="../" target="_blank" rel="noopener noreferrer">
+              <span class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.05" stroke="currentColor" stroke-width="1.7"/><path d="M4 12h16M12 4c2.4 2.6 3.6 5.3 3.6 8s-1.2 5.4-3.6 8c-2.4-2.6-3.6-5.3-3.6-8s1.2-5.4 3.6-8Z" stroke="currentColor" stroke-width="1.55"/></svg>
+              </span>
+              <span class="contact-copy"><strong>Website</strong><small>optimum-ksa.com</small></span>
+              <span class="arrow-icon" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </section>
+    <footer class="page-footer"><span>OPTIMUM</span><span>Shape Better Decisions</span><span>© 2026</span></footer>
+  </main>
+</body>
+</html>

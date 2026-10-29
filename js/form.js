@@ -1,11 +1,22 @@
 /* Enquiry form: validation + POST JSON to the Azure Function in data-endpoint */
 (function(){
+  // Cloudflare Turnstile site key (public). Leave empty to run without the widget;
+  // set TURNSTILE_SECRET on the API at the same time, or every submission is rejected.
+  var SITEKEY='';
   var AR=document.documentElement.lang==='ar',TRUSTED='Trusted Verification Service',EMAIL=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if(SITEKEY){
+    window.onTurnstileLoad=function(){document.querySelectorAll('form.form .ts').forEach(function(el){
+      el._id=turnstile.render(el,{sitekey:SITEKEY,language:AR?'ar':'en',theme:'dark'})})};
+    var s=document.createElement('script');s.async=true;
+    s.src='https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&render=explicit';
+    document.head.appendChild(s);
+  }
   var T=AR?{req:'هذا الحقل مطلوب.',email:'يرجى إدخال بريد إلكتروني صحيح.',check:'يرجى استكمال الحقول المحددة.',sending:'جارٍ الإرسال...',ok:'شكراً لكم. تم إرسال طلبكم بنجاح وسيتواصل معكم فريقنا قريباً.',fail:'عذراً، تعذّر إرسال طلبكم حالياً. يرجى المحاولة مرة أخرى لاحقاً.'}
     :{req:'This field is required.',email:'Please enter a valid email address.',check:'Please complete the highlighted fields.',sending:'Sending...',ok:'Thank you. Your enquiry has been sent successfully and our team will contact you soon.',fail:'Sorry, we could not send your enquiry right now. Please try again later.'};
   function err(c,m){var f=c.closest('.field');if(!f)return;var e=f.querySelector('.err');c.setAttribute('aria-invalid',!!m);if(!m){if(e)e.remove();return}if(!e){e=document.createElement('span');e.className='err';f.appendChild(e)}e.textContent=m}
   document.querySelectorAll('form.form').forEach(function(form){
-    var area=form.elements['area-of-interest'],type=form.elements['verification-type'],wrap=type&&type.closest('.field'),msg=form.querySelector('.msg'),btn=form.querySelector('[type=submit]');
+    var area=form.elements['area-of-interest'],type=form.elements['verification-type'],wrap=type&&type.closest('.field'),msg=form.querySelector('.msg'),btn=form.querySelector('[type=submit]'),ts=null;
+    if(SITEKEY){ts=document.createElement('div');ts.className='full ts';btn.closest('.full').before(ts)}
     function sync(){var on=area.value===TRUSTED;wrap.hidden=!on;type.disabled=!on;type.required=on;if(!on){type.value='';err(type)}}
     if(area&&type){area.addEventListener('change',sync);sync()}
     form.addEventListener('input',function(e){if(e.target.name)err(e.target)});
@@ -23,7 +34,7 @@
       fetch(form.dataset.endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
         .then(function(r){if(!r.ok)throw r.status;form.reset();if(area)sync();msg.textContent=T.ok;msg.className='msg ok'})
         .catch(function(){msg.textContent=T.fail;msg.className='msg bad'})
-        .then(function(){btn.disabled=false;btn.textContent=label});
+        .then(function(){btn.disabled=false;btn.textContent=label;if(ts&&window.turnstile&&ts._id!=null)turnstile.reset(ts._id)});
     });
   });
 })();

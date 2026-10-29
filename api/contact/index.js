@@ -2,11 +2,47 @@
 // Sends website form submissions by email using Azure Communication Services.
 // Settings (Azure portal > Static Web App > Environment variables):
 //   ACS_CONNECTION_STRING  - connection string of the Communication Services resource
-//   MAIL_FROM              - verified sender, e.g. DoNotReply@xxxx.azurecomm.net
+//   MAIL_FROM              - sender on the verified custom domain (SPF + DKIM), e.g. DoNotReply@optimum-ksa.com
 //   MAIL_TO                - recipient, for now info@optimum-ksa.com
+//   TURNSTILE_SECRET       - optional Cloudflare Turnstile secret; when set, a valid token is required
+//                            (set SITEKEY in js/form.js at the same time)
 const { EmailClient } = require('@azure/communication-email');
 
 const TRUSTED = 'Trusted Verification Service';
+const TS_FIELD = 'cf-turnstile-response';
+
+// Best-effort per-IP rate limit. Memory is per function instance, so this slows
+// down a single sender rather than giving a hard global cap.
+const WINDOW_MS = 10 * 60 * 1000;
+const MAX_PER_WINDOW = 5;
+const hits = new Map();
+
+function clientIp(req) {
+  const h = req.headers || {};
+  const raw = h['x-azure-clientip'] || h['x-forwarded-for'] || h['x-client-ip'] || '';
+  return String(raw).split(',')[0].trim().replace(/:\d+$/, '') || 'unknown';
+}
+
+function limited(ip) {
+  const now = Date.now();
+  const recent = (hits.get(ip) || []).filter((t) => now - t < WINDOW_MS);
+  recent.push(now);
+  hits.set(ip, recent);
+  if (hits.size > 5000) for (const [k, v] of hits) if (now - v[v.length - 1] >= WINDOW_MS) hits.delete(k);
+  return recent.length > MAX_PER_WINDOW;
+}
+
+async function turnstileOk(token, ip) {
+  if (!token) return false;
+  const body = new URLSearchParams({ secret: process.env.TURNSTILE_SECRET, response: token });
+  if (ip !== 'unknown') body.set('remoteip', ip);
+  try {
+    const r = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', { method: 'POST', body });
+    return (await r.json()).success === true;
+  } catch (e) {
+    return false;
+  }
+}
 const REQUIRED = ['your-name', 'your-email', 'your-phone', 'area-of-interest'];
 
 const LABELS = {
@@ -40,6 +76,14 @@ module.exports = async function (context, req) {
 
   // Honeypot filled in = bot. Pretend success so bots don't retry.
   if (fields.website) return reply(context, 200, { success: true });
+
+  const ip = clientIp(req);
+  if (limited(ip)) return reply(context, 429, { error: 'Too many requests. Please try again later.' });
+
+  if (process.env.TURNSTILE_SECRET && !(await turnstileOk(String(fields[TS_FIELD] || ''), ip))) {
+    return reply(context, 403, { error: 'Verification failed. Please try again.' });
+  }
+  delete fields[TS_FIELD];
 
   const missing = REQUIRED.filter((f) => !String(fields[f] || '').trim());
   if (missing.length) return reply(context, 400, { error: 'Missing required fields: ' + missing.join(', ') });

@@ -38,7 +38,7 @@
 
   // testimonials: quote fades, logo column centres the active logo
   document.querySelectorAll('.tst').forEach(function(w){
-    var q=w.querySelectorAll('figure'),logos=w.querySelectorAll('.tst-logos img'),track=w.querySelector('.tst-logos>div'),dots=w.querySelector('.tst-dots'),b=[];
+    var q=w.querySelectorAll('figure'),logos=w.querySelectorAll('.tst-logos span'),track=w.querySelector('.tst-logos>div'),dots=w.querySelector('.tst-dots'),b=[];
     q.forEach(function(_,j){var d=document.createElement('button');d.type='button';d.setAttribute('aria-label',j+1);dots.appendChild(d);b.push(d)});
     var go=cycle(w,q.length,function(i){
       [q,logos,b].forEach(function(set){set.forEach(function(el,j){el.classList.toggle('on',j===i)})});
